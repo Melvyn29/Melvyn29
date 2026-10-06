@@ -3,24 +3,10 @@
   <img alt="Graphe des contributions de la dernière année" src="assets/contributions-light.svg" width="100%">
 </picture>
 
-<p>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/mois-dark.svg">
-    <img alt="Commits par mois" src="assets/mois-light.svg" width="24%">
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/heures-dark.svg">
-    <img alt="Commits par heure de la journée" src="assets/heures-light.svg" width="24%">
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/langages-dark.svg">
-    <img alt="Langages" src="assets/langages-light.svg" width="24%">
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/chiffres-dark.svg">
-    <img alt="eLens Platform en chiffres" src="assets/chiffres-light.svg" width="24%">
-  </picture>
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cartes-dark.svg">
+  <img alt="Contributions par mois, heures de travail, langages et chiffres d'eLens Platform" src="assets/cartes-light.svg" width="100%">
+</picture>
 
 ### Salut, moi c'est Melvyn 👋
 

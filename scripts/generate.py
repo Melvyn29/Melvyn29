@@ -149,7 +149,7 @@ def sans(s, x, y, size, fill, anchor="start", weight=400):
 
 
 def card(w, h, c, inner):
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">'
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w:g} {h}" width="{w:g}" height="{h}">'
             f'<rect x=".5" y=".5" width="{w-1}" height="{h-1}" rx="14" fill="{c["bg"]}" stroke="{c["edge"]}"/>'
             f'{inner}</svg>')
 
@@ -219,7 +219,8 @@ def contributions(D, c):
     return card(W, H, c, "".join(o))
 
 
-CW, CH = 210, 176
+W_ROW, GAP, CH = 880, 12, 176  # même largeur que le graphe : les bords tombent alignés
+CW = (W_ROW - 3 * GAP) / 4
 
 
 def small_month(D, c):
@@ -247,7 +248,7 @@ def small_month(D, c):
 
 def small_hour(D, c):
     hours = D["hours"]; o = [serif("Quand je code", 16, 30, 19, c["ink"])]
-    x0, base, ph, bw, gap = 16, 146, 92, 5.4, 2.0
+    x0, base, ph = 16, 146, 92; step = (CW - 34) / 24; bw = step * .72; gap = step - bw
     mx = max(hours.values(), default=0) or 1; pk = max(hours, key=hours.get) if hours else None
     o.append(f'<line x1="{x0}" y1="{base}" x2="{CW-16}" y2="{base}" stroke="{c["edge"]}"/>')
     for hh in range(24):
@@ -285,14 +286,24 @@ def small_nums(D, c):
     return card(CW, CH, c, "".join(o))
 
 
+def row(cards, c):
+    """Les petites cartes côte à côte, dans une seule image de la largeur du graphe."""
+    global CW
+    CW = (W_ROW - (len(cards) - 1) * GAP) / len(cards)
+    parts = []
+    for i, fn in enumerate(cards):
+        svg = fn(c).replace('<svg xmlns="http://www.w3.org/2000/svg" ', f'<svg x="{i * (CW + GAP):.1f}" y="0" ', 1)
+        parts.append(svg)
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W_ROW} {CH}" width="{W_ROW}" height="{CH}">'
+            f'{"".join(parts)}</svg>')
+
+
 def render(D):
     ASSETS.mkdir(exist_ok=True)
-    cards = [("contributions", contributions), ("mois", small_month), ("heures", small_hour), ("langages", small_lang)]
-    if D["numbers"]:
-        cards.append(("chiffres", small_nums))
+    small = [small_month, small_hour, small_lang] + ([small_nums] if D["numbers"] else [])
     for theme, c in TH.items():
-        for name, fn in cards:
-            (ASSETS / f"{name}-{theme}.svg").write_text(fn(D, c), encoding="utf-8")
+        (ASSETS / f"contributions-{theme}.svg").write_text(contributions(D, c), encoding="utf-8")
+        (ASSETS / f"cartes-{theme}.svg").write_text(row([lambda c, f=f: f(D, c) for f in small], c), encoding="utf-8")
 
 
 if __name__ == "__main__":
