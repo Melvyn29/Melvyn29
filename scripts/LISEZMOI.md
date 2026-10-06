@@ -18,9 +18,9 @@ Les dépôts étant privés, le script lit les données avec un jeton personnel 
 
 ## Ce que lit le script
 
-- graphe et contributions par mois : le calendrier de contributions GitHub (dernière année) ;
+- graphe et contributions par mois : le calendrier de contributions GitHub (dernière année), avec pour plancher les commits lus dans chaque dépôt (le calendrier ne voit les contributions privées que si le profil les publie) ;
 - « Quand je code » : l'heure des commits de la branche par défaut de chaque dépôt (heure locale du commit) ;
-- langages : la somme des langages de tous les dépôts ;
+- langages : la somme des langages de tous les dépôts, sans Jupyter Notebook ni HTML (`PROFILE_LANG_IGNORE`) ;
 - « En chiffres » : l'arborescence de `elens-platform` (fichiers `*.test.ts(x)`, migrations, pages, suites SQL).
 
 Variables facultatives : `PROFILE_TZ` (défaut `America/Toronto`), `PROFILE_STATS_REPO` (défaut `elens-platform`).

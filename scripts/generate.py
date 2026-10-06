@@ -70,6 +70,8 @@ query($owner: String!, $name: String!, $author: ID!, $since: GitTimestamp!, $cur
 }"""
 
 LANG_NAMES = {"PLpgSQL": "SQL", "PLSQL": "SQL", "TSQL": "SQL"}
+# Langages qui gonflent les octets sans être du code écrit à la main (sorties de notebooks, maquettes).
+LANG_IGNORE = {l.strip() for l in os.environ.get("PROFILE_LANG_IGNORE", "Jupyter Notebook,HTML").split(",") if l.strip()}
 
 
 def fetch(end):
@@ -78,12 +80,14 @@ def fetch(end):
     cal = v["contributionsCollection"]["contributionCalendar"]
     days = {dt.date.fromisoformat(d["date"]): d["contributionCount"]
             for w in cal["weeks"] for d in w["contributionDays"]}
+    commit_days = collections.Counter()
 
     langs = collections.Counter()
     hours = collections.Counter()
     for repo in v["repositories"]["nodes"]:
         for e in repo["languages"]["edges"]:
-            langs[LANG_NAMES.get(e["node"]["name"], e["node"]["name"])] += e["size"]
+            if e["node"]["name"] not in LANG_IGNORE:
+                langs[LANG_NAMES.get(e["node"]["name"], e["node"]["name"])] += e["size"]
         if not repo["defaultBranchRef"]:
             continue
         cursor = None
@@ -95,9 +99,16 @@ def fetch(end):
                 if t.utcoffset() == dt.timedelta(0):  # heure sans fuseau d'origine : ramenée à l'heure locale
                     t = t.astimezone(TZ)
                 hours[t.hour] += 1
+                commit_days[t.date()] += 1
             if not h["pageInfo"]["hasNextPage"]:
                 break
             cursor = h["pageInfo"]["endCursor"]
+
+    # Le calendrier ne compte les contributions privées que si le profil les publie ; les commits lus
+    # dépôt par dépôt servent de plancher, pour que le graphe ne tombe jamais à zéro.
+    for d, n in commit_days.items():
+        if start <= d <= end:
+            days[d] = max(days.get(d, 0), n)
 
     numbers = None
     branch = next((r["defaultBranchRef"]["name"] for r in v["repositories"]["nodes"]
@@ -112,8 +123,11 @@ def fetch(end):
             (count(r"^src/app/(.*/)?page\.tsx$"), "pages web"),
             (count(r"^supabase/tests/[^/]+\.sql$"), "suites SQL"),
         ]
-    return dict(end=end, start=start, days=days, total=cal["totalContributions"],
-                hours=hours, langs=langs, numbers=numbers)
+    total = max(cal["totalContributions"], sum(days.values()))
+    print(f"calendrier GitHub : {cal['totalContributions']} · commits lus : {sum(commit_days.values())} · total retenu : {total}")
+    print("langages :", ", ".join(f"{k} {v // 1024} Ko" for k, v in langs.most_common(6)))
+    print("chiffres :", numbers)
+    return dict(end=end, start=start, days=days, total=total, hours=hours, langs=langs, numbers=numbers)
 
 
 # ---------------------------------------------------------------- dessin
