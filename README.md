@@ -10,9 +10,9 @@
 
 ### Salut, moi c'est Melvyn 👋
 
-J'ai cofondé **[eLens Technologies](https://elens.app)** : on construit la plateforme d'analyse
-des équipes d'ultimate frisbee. Je touche à tout le produit : l'app web, l'app mobile, la base
-de données, et le pipeline de vision par ordinateur qui transforme la vidéo des matchs en statistiques.
+Je travail sur **[eLens Technologies](https://elens.app)** : on construit une plateforme d'analyse statistique
+pour des équipes d'ultimate frisbee. Je touche à tout le produit : l'app web, l'app mobile, la base
+de données, et le pipeline de vision par ordinateur qui transforme la vidéo des matchs en données.
 
 ### Ce que je construis
 
@@ -22,7 +22,7 @@ de données, et le pipeline de vision par ordinateur qui transforme la vidéo de
 | 📱 | **eLens Mobile** | Le même espace dans la poche, avec les notifications | Expo · React Native |
 | 🎥 | **eLens Vision** | Suivi des joueurs et du disque à partir de la vidéo | PyTorch · SAM2 · RF‑DETR |
 
-> Le code est dans des dépôts privés. Le produit, lui, est sur **[elens.app](https://elens.app)**.
+> Le code est dans des dépôts privés. Le produit, lui, est sur **[elens.app](https://elens.app)** allez jetez un coup d'oeil !
 
 ### Mes outils
 
