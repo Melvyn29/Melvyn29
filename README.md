@@ -1,0 +1,54 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/contributions-dark.svg">
+  <img alt="Graphe des contributions de la dernière année" src="assets/contributions-light.svg" width="100%">
+</picture>
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/mois-dark.svg">
+    <img alt="Commits par mois" src="assets/mois-light.svg" width="24%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/heures-dark.svg">
+    <img alt="Commits par heure de la journée" src="assets/heures-light.svg" width="24%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/langages-dark.svg">
+    <img alt="Langages" src="assets/langages-light.svg" width="24%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/chiffres-dark.svg">
+    <img alt="eLens Platform en chiffres" src="assets/chiffres-light.svg" width="24%">
+  </picture>
+</p>
+
+### Salut, moi c'est Melvyn 👋
+
+J'ai cofondé **[eLens Technologies](https://elens.app)** : on construit la plateforme d'analyse
+des équipes d'ultimate frisbee. Je touche à tout le produit : l'app web, l'app mobile, la base
+de données, et le pipeline de vision par ordinateur qui transforme la vidéo des matchs en statistiques.
+
+### Ce que je construis
+
+| | Projet | Ce que ça fait | Stack |
+|:-:|---|---|---|
+| 🌐 | **eLens Platform** | L'espace d'équipe : calendrier et présences, playbooks, playlists vidéo, stats de match, messagerie, assistant IA | Next.js · TypeScript · Supabase |
+| 📱 | **eLens Mobile** | Le même espace dans la poche, avec les notifications | Expo · React Native |
+| 🎥 | **eLens Vision** | Suivi des joueurs et du disque à partir de la vidéo | PyTorch · SAM2 · RF‑DETR |
+
+> Le code est dans des dépôts privés. Le produit, lui, est sur **[elens.app](https://elens.app)**.
+
+### Mes outils
+
+![Next.js](https://img.shields.io/badge/Next.js-15151a?style=flat-square&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![React Native](https://img.shields.io/badge/Expo%20%2F%20React%20Native-15151a?style=flat-square&logo=expo&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-0F172A?style=flat-square&logo=tailwindcss&logoColor=38BDF8)
+![Supabase](https://img.shields.io/badge/Supabase-3a7560?style=flat-square&logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
+![Netlify](https://img.shields.io/badge/Netlify-00AD9F?style=flat-square&logo=netlify&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=anthropic&logoColor=white)
+
+🌐 [elens.app](https://elens.app) · 🗣️ Français / English
